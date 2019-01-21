@@ -15,6 +15,7 @@
 		0BB55FF021F668B400C7B2C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB55FEF21F668B400C7B2C1 /* main.m */; };
 		0BB55FFA21F668B400C7B2C1 /* ScrollViewImageGalleryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB55FF921F668B400C7B2C1 /* ScrollViewImageGalleryTests.m */; };
 		0BB5600521F668B400C7B2C1 /* ScrollViewImageGalleryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5600421F668B400C7B2C1 /* ScrollViewImageGalleryUITests.m */; };
+		0BB5601721F6733200C7B2C1 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB5601621F6733200C7B2C1 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		0BB5600021F668B400C7B2C1 /* ScrollViewImageGalleryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrollViewImageGalleryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BB5600421F668B400C7B2C1 /* ScrollViewImageGalleryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollViewImageGalleryUITests.m; sourceTree = "<group>"; };
 		0BB5600621F668B400C7B2C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BB5601521F6733200C7B2C1 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		0BB5601621F6733200C7B2C1 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				0BB55FE121F668B300C7B2C1 /* AppDelegate.m */,
 				0BB55FE321F668B300C7B2C1 /* ViewController.h */,
 				0BB55FE421F668B300C7B2C1 /* ViewController.m */,
+				0BB5601521F6733200C7B2C1 /* DetailViewController.h */,
+				0BB5601621F6733200C7B2C1 /* DetailViewController.m */,
 				0BB55FE621F668B300C7B2C1 /* Main.storyboard */,
 				0BB55FE921F668B400C7B2C1 /* Assets.xcassets */,
 				0BB55FEB21F668B400C7B2C1 /* LaunchScreen.storyboard */,
@@ -265,6 +270,7 @@
 				0BB55FE521F668B300C7B2C1 /* ViewController.m in Sources */,
 				0BB55FF021F668B400C7B2C1 /* main.m in Sources */,
 				0BB55FE221F668B300C7B2C1 /* AppDelegate.m in Sources */,
+				0BB5601721F6733200C7B2C1 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

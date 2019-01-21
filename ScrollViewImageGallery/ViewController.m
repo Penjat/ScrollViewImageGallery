@@ -61,6 +61,9 @@
     [image1.trailingAnchor constraintEqualToAnchor:image2.leadingAnchor].active = YES;
     
 }
+- (IBAction)userTapped:(id)sender {
+    NSLog(@"tap detected.");
+}
 
 
 @end
