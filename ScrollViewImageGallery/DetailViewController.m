@@ -9,7 +9,6 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -19,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.scrollView.delegate = self;
+    self.imageView.image = [UIImage imageNamed:self.imageName];
 }
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
@@ -26,6 +26,11 @@
     return self.imageView;
 }
 
+-(void)sendImageName:(NSString*)imageName{
+    NSLog(@"message recieved %@",imageName);
+    //self.imageView.image = [UIImage imageNamed:imageName];
+    self.imageName = imageName;
+}
 /*
 #pragma mark - Navigation
 

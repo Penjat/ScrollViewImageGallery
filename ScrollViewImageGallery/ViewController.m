@@ -7,18 +7,23 @@
 //
 
 #import "ViewController.h"
+#import "DetailViewController.h"
 
 @interface ViewController ()
-
+@property (strong,nonatomic)NSArray *imageNameArray;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view, typically from a nib.
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
+    
+    self.imageNameArray = @[@"reboot",@"freakazoid" ];
+    
     NSLog(@"creating images");
     //-------------image 1------------------------
     UIImageView *image1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"reboot"]];
@@ -63,7 +68,19 @@
 }
 - (IBAction)userTapped:(id)sender {
     NSLog(@"tap detected.");
+    
+   
+    [self performSegueWithIdentifier:@"toDetails" sender:self];
 }
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(NSString*)sender{
+    NSLog(@"preparing for segue");
+    DetailViewController* detailViewController = segue.destinationViewController;
+    
+    int page = self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
+    //detailViewController.imageView.image = [UIImage imageNamed: @"reboot"];
+    
+    [detailViewController sendImageName:self.imageNameArray[page]];
+    
+}
 
 @end
