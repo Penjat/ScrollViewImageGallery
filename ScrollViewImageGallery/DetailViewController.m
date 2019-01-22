@@ -111,24 +111,59 @@
     self.smallHud.backgroundColor = UIColor.yellowColor;
     [self.hud addSubview:self.smallHud];
 }
+//-(void)updateHud{
+//    NSLog(@"offsetX = %f , image width = %f , contentWidth = %f",self.scrollView.contentOffset.x,  self.imageView.image.size.width,self.scrollView.contentSize.width);
+//
+//    //these ratios are wrong somewhere
+//    float smallX = self.scrollView.contentOffset.x *(self.hud.bounds.size.width /self.view.bounds.size.width)*(self.view.frame.size.width / self.scrollView.contentSize.width);
+//
+//    float smallY = self.scrollView.contentOffset.y *(self.hud.frame.size.height /self.view.frame.size.height)*(self.view.frame.size.height / self.scrollView.contentSize.height);
+//
+//    float smallWidth = (self.view.frame.size.width / self.scrollView.contentSize.width)*(200.0 / self.view.frame.size.width)*self.view.frame.size.width/self.scrollView.zoomScale;
+//
+//    float smallHeight = (self.view.frame.size.height / self.scrollView.contentSize.height)*(200.0 / self.view.frame.size.height)*self.view.frame.size.height/self.scrollView.zoomScale;
+//
+//
+//    NSLog(@"hud frame width %f",self.hud.frame.size.width);
+//    if(smallWidth+smallX > self.hud.frame.size.width){
+//        smallWidth = self.hud.frame.size.width-smallX;
+//
+//    }
+//    if(smallHeight+smallY > self.hud.frame.size.height){
+//        smallHeight = self.hud.frame.size.height-smallY;
+//    }
+//    self.smallHud.frame = CGRectMake(smallX,smallY,smallWidth, smallHeight);
+//}
+
 -(void)updateHud{
-    //these ratios are wrong somewhere
-    float smallX = self.scrollView.contentOffset.x *(self.hud.frame.size.width /self.view.frame.size.width)/self.scrollView.zoomScale;
-    float smallY = self.scrollView.contentOffset.y *(self.hud.frame.size.height /self.view.frame.size.height)/self.scrollView.zoomScale;
+    float hudWidth = self.hud.frame.size.width;
+    float hudHeight = self.hud.frame.size.height;
+    NSLog(@"hudWidth:%f hudHeight:%f",hudWidth,hudHeight);
     
-    float smallWidth = (self.view.frame.size.width / self.imageView.image.size.width)*(200.0 / self.view.frame.size.width)*self.view.frame.size.width/self.scrollView.zoomScale;
+    float phoneWidth = self.view.frame.size.width;
+    float phoneHeight = self.view.frame.size.height;
+    NSLog(@"phoneWidth:%f phoneHeight:%f",phoneWidth,phoneHeight);
     
-    float smallHeight = (self.view.frame.size.height / self.imageView.image.size.height)*(200.0 / self.view.frame.size.height)*self.view.frame.size.height/self.scrollView.zoomScale;
+    float contentWidth = self.scrollView.contentSize.width;
+    float contentHeight = self.scrollView.contentSize.height;
+    NSLog(@"contentWidth:%f contentHeight:%f",contentWidth,contentHeight);
+    
+    float smallWidth = hudWidth*phoneWidth/contentWidth;
+    float smallHeight = hudHeight*phoneHeight/contentHeight;
+    
+    float smallX = self.scrollView.contentOffset.x*hudWidth/contentWidth;
+    
+    float smallY = self.scrollView.contentOffset.y*hudHeight/contentHeight;
     
     
-    
-    if(smallWidth+smallX > self.hud.frame.size.width){
-        smallWidth = self.hud.frame.size.width-smallX;
+    if(smallWidth+smallX > hudWidth){
+                smallWidth = hudWidth-smallX;
         
-    }
-    if(smallHeight+smallY > self.hud.frame.size.height){
-        smallHeight = self.hud.frame.size.height-smallY;
-    }
+            }
+            if(smallHeight+smallY > hudHeight){
+                smallHeight = hudHeight-smallY;
+            }
+    
     self.smallHud.frame = CGRectMake(smallX,smallY,smallWidth, smallHeight);
 }
 
