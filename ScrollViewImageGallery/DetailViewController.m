@@ -9,7 +9,10 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
+@property (strong,nonatomic)UIView *hud;
+@property (strong,nonatomic)UIView *smallHud;
 
+@property (nonatomic)float wholeImageScaling;//the zoom at which the entire image is visable
 @end
 
 @implementation DetailViewController
@@ -30,18 +33,120 @@
     //then choose the smaller one
     if(scalingFactorX < scalingFactorY){
         self.scrollView.zoomScale = scalingFactorX;
+       
     }else{
         self.scrollView.zoomScale = scalingFactorY;
     }
-    
-    
-    
+    self.wholeImageScaling = self.scrollView.zoomScale;
+    //self.hud.hidden = YES;
+    [self createHud];
     
 }
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
+-(void)createHud{
+    
+    float heightWidthRatio = self.imageView.image.size.height / self.imageView.image.size.width;
+    float width = 200.0;
+    float height = width * heightWidthRatio;
+    
+    self.hud = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self.view addSubview:self.hud];
+    
+    self.hud.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.hud.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.3];
+    
+    NSLayoutConstraint *widthCon = [NSLayoutConstraint constraintWithItem:self.hud
+                                            attribute:NSLayoutAttributeWidth
+                                            relatedBy:NSLayoutRelationEqual
+                                               toItem:nil
+                                            attribute:NSLayoutAttributeNotAnAttribute
+                                           multiplier:1
+                                             constant:width];
+    
+    NSLayoutConstraint *heightCon = [NSLayoutConstraint constraintWithItem:self.hud
+                                             attribute:NSLayoutAttributeHeight
+                                             relatedBy:NSLayoutRelationEqual
+                                                toItem:nil
+                                             attribute:NSLayoutAttributeNotAnAttribute
+                                            multiplier:1
+                                              constant:height];
+    
+    
+    NSLayoutConstraint *leftCon = [NSLayoutConstraint constraintWithItem:self.hud
+                                            attribute:NSLayoutAttributeLeftMargin
+                                            relatedBy:NSLayoutRelationEqual
+                                               toItem:self.view
+                                            attribute:NSLayoutAttributeLeftMargin
+                                           multiplier:1
+                                             constant:0];
+    NSLayoutConstraint *topCon = [NSLayoutConstraint constraintWithItem:self.hud
+                                                              attribute:NSLayoutAttributeTopMargin
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeTopMargin
+                                                             multiplier:1
+                                                               constant:40];
+    
+    
+    
+    
+    [NSLayoutConstraint activateConstraints:@[heightCon,widthCon,topCon,leftCon]];
+    
+    //get ratio between screen height and width
+    float smallWidth = (self.view.frame.size.width / self.imageView.image.size.width)*(200.0 / self.view.frame.size.width)*self.view.frame.size.width/self.scrollView.zoomScale;
+    
+    float smallHeight = (self.view.frame.size.height / self.imageView.image.size.height)*(200.0 / self.view.frame.size.height)*self.view.frame.size.height/self.scrollView.zoomScale;
+    
+    if(smallWidth > width){
+        smallWidth = width;
+    }
+    if(smallHeight > height){
+        smallHeight = height;
+    }
+    
+    self.smallHud = [[UIView alloc]initWithFrame:CGRectMake(0, 0, smallWidth, smallHeight)];
+    
+    
+    self.smallHud.backgroundColor = UIColor.yellowColor;
+    [self.hud addSubview:self.smallHud];
+}
+-(void)updateHud{
+    //these ratios are wrong somewhere
+    float smallX = self.scrollView.contentOffset.x *(self.hud.frame.size.width /self.view.frame.size.width)/self.scrollView.zoomScale;
+    float smallY = self.scrollView.contentOffset.y *(self.hud.frame.size.height /self.view.frame.size.height)/self.scrollView.zoomScale;
+    
+    float smallWidth = (self.view.frame.size.width / self.imageView.image.size.width)*(200.0 / self.view.frame.size.width)*self.view.frame.size.width/self.scrollView.zoomScale;
+    
+    float smallHeight = (self.view.frame.size.height / self.imageView.image.size.height)*(200.0 / self.view.frame.size.height)*self.view.frame.size.height/self.scrollView.zoomScale;
+    
+    
+    
+    if(smallWidth+smallX > self.hud.frame.size.width){
+        smallWidth = self.hud.frame.size.width-smallX;
+        
+    }
+    if(smallHeight+smallY > self.hud.frame.size.height){
+        smallHeight = self.hud.frame.size.height-smallY;
+    }
+    self.smallHud.frame = CGRectMake(smallX,smallY,smallWidth, smallHeight);
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
+    //check to see if we need to show the hud
     
     return self.imageView;
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self updateHud];
+}
+-(void)scrollViewDidZoom:(UIScrollView *)scrollView{
+    if(self.scrollView.zoomScale < self.wholeImageScaling){
+        self.hud.hidden = YES;
+    }else{
+        self.hud.hidden = NO;
+    }
+    [self updateHud];
 }
 
 -(void)sendImageName:(NSString*)imageName{

@@ -85,7 +85,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bhl-fZ-3Yg" firstAttribute="top" secondItem="ZQy-bZ-Nq4" secondAttribute="top" id="8r3-mF-VxJ"/>
                             <constraint firstItem="ZQy-bZ-Nq4" firstAttribute="trailing" secondItem="Bhl-fZ-3Yg" secondAttribute="trailing" id="Nv7-g3-AsA"/>
