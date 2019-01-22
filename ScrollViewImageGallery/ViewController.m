@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong,nonatomic)NSArray *imageNameArray;
 @end
 
@@ -23,7 +24,8 @@
     self.scrollView.pagingEnabled = YES;
     
     self.imageNameArray = @[@"reboot",@"freakazoid" ];
-    
+    self.pageControl.numberOfPages = 2;
+    self.pageControl.currentPage = 0;
     NSLog(@"creating images");
     //-------------image 1------------------------
     UIImageView *image1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"reboot"]];
@@ -66,6 +68,21 @@
     [image1.trailingAnchor constraintEqualToAnchor:image2.leadingAnchor].active = YES;
     
 }
+- (IBAction)pageChanged:(UIPageControl*)sender {
+    
+    NSLog(@"page changed %li",(long)sender.currentPage);
+    
+    long page = sender.currentPage;
+    float x = (self.scrollView.frame.size.width*page);
+    float y = 0;
+    float width = self.scrollView.frame.size.width;
+    float height = self.scrollView.frame.size.height;
+    
+    
+    CGRect frame = CGRectMake(x, y,width ,height ); //wherever you want to scroll
+    [self.scrollView scrollRectToVisible:frame animated:YES];
+    
+}
 - (IBAction)userTapped:(id)sender {
     NSLog(@"tap detected.");
     
@@ -81,6 +98,10 @@
     
     [detailViewController sendImageName:self.imageNameArray[page]];
     
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    int page = self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
+    self.pageControl.currentPage = page;
 }
 
 @end
