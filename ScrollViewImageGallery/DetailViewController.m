@@ -108,7 +108,8 @@
     self.smallHud = [[UIView alloc]initWithFrame:CGRectMake(0, 0, smallWidth, smallHeight)];
     
     
-    self.smallHud.backgroundColor = UIColor.yellowColor;
+    self.smallHud.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:0.6];
+    
     [self.hud addSubview:self.smallHud];
 }
 //-(void)updateHud{
