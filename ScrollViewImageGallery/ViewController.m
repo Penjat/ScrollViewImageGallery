@@ -23,49 +23,52 @@
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
     
-    self.imageNameArray = @[@"reboot",@"freakazoid" ];
-    self.pageControl.numberOfPages = 2;
+    self.imageNameArray = @[@"reboot",@"freakazoid",@"spongebob",@"powerrangers" ];
+    self.pageControl.numberOfPages = self.imageNameArray.count;
     self.pageControl.currentPage = 0;
     NSLog(@"creating images");
-    //-------------image 1------------------------
-    UIImageView *image1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"reboot"]];
+    [self createimageFromArray:self.imageNameArray];
     
-    [self.scrollView addSubview:image1];
+}
+-(void)createimageFromArray:(NSArray<NSString*>*)imageNames{
     
-    image1.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    image1.contentMode = UIViewContentModeScaleAspectFill;
-    image1.clipsToBounds = YES;
-    
-    //-------------image 2------------------------
-    UIImageView *image2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"freakazoid"]];
-    
-    [self.scrollView addSubview:image2];
-    
-    image2.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    image2.contentMode = UIViewContentModeScaleAspectFill;
-    image2.clipsToBounds = YES;
-    
-    //-------------set layout------------------------
-    
-    
-    [image1.topAnchor constraintEqualToAnchor:self.scrollView.topAnchor].active = YES;
-    [image1.bottomAnchor constraintEqualToAnchor:self.scrollView.bottomAnchor].active = YES;
-    [image2.topAnchor constraintEqualToAnchor:self.scrollView.topAnchor].active = YES;
-    [image2.bottomAnchor constraintEqualToAnchor:self.scrollView.bottomAnchor].active = YES;
-    
-    [image1.leadingAnchor constraintEqualToAnchor:self.scrollView.leadingAnchor].active = YES;
-    [image2.trailingAnchor constraintEqualToAnchor:self.scrollView.trailingAnchor].active = YES;
-    
-    // width and height
-    [image1.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
-    [image2.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
-    
-    [image1.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
-    [image2.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
-    
-    [image1.trailingAnchor constraintEqualToAnchor:image2.leadingAnchor].active = YES;
+    int i = 0;
+    UIImageView *previousImage = nil;
+    for(NSString *imageName in imageNames){
+        UIImageView *image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:imageName]];
+        
+        [self.scrollView addSubview:image];
+        
+        image.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        image.contentMode = UIViewContentModeScaleAspectFill;
+        image.clipsToBounds = YES;
+        
+        //set width and height
+        [image.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
+        
+        [image.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+        
+        //check if it is the first image
+        if(previousImage == nil){
+            //if so conect it to the view
+            [image.leadingAnchor constraintEqualToAnchor:self.scrollView.leadingAnchor].active = YES;
+            
+        }else{
+            //if there is a previous image, connect to that
+            [previousImage.trailingAnchor constraintEqualToAnchor:image.leadingAnchor].active = YES;
+        }
+        
+        //check if it is the last image
+        if(imageNames.count -1 == i ){
+            [image.trailingAnchor constraintEqualToAnchor:self.scrollView.trailingAnchor].active = YES;
+        }
+        
+        previousImage = image;
+        [self.scrollView addSubview:image];
+        i++;
+        
+    }
     
 }
 - (IBAction)pageChanged:(UIPageControl*)sender {

@@ -27,8 +27,7 @@
                                 </connections>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="uh3-Oe-nYo">
-                                <rect key="frame" x="168" y="347" width="39" height="37"/>
-                                <color key="backgroundColor" red="0.0" green="0.15072983209999999" blue="0.81808613990000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="8" y="610" width="359" height="37"/>
                                 <connections>
                                     <action selector="pageChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Rm0-d0-BYr"/>
                                 </connections>
@@ -36,11 +35,13 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="uh3-Oe-nYo" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="6ML-sR-gxi"/>
                             <constraint firstItem="1AR-wy-n0F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="AHD-7U-289"/>
+                            <constraint firstItem="uh3-Oe-nYo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="BHu-Zo-9Zi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1AR-wy-n0F" secondAttribute="trailing" id="F1J-49-eaa"/>
-                            <constraint firstItem="uh3-Oe-nYo" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="RTc-mE-DRh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uh3-Oe-nYo" secondAttribute="trailing" constant="8" id="Mxx-bU-gsf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="uh3-Oe-nYo" secondAttribute="bottom" constant="20" id="Nsm-dR-wJe"/>
                             <constraint firstItem="1AR-wy-n0F" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="frX-Pc-VGc"/>
+                            <constraint firstItem="uh3-Oe-nYo" firstAttribute="centerX" secondItem="1AR-wy-n0F" secondAttribute="centerX" id="mpT-IG-ESk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1AR-wy-n0F" secondAttribute="bottom" id="zFj-M9-TBf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -118,7 +119,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Y3-UH-blh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1105" y="-26"/>
+            <point key="canvasLocation" x="-366" y="17"/>
         </scene>
     </scenes>
     <resources>

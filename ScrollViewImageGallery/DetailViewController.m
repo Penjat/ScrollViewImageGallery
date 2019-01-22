@@ -19,6 +19,24 @@
     // Do any additional setup after loading the view.
     self.scrollView.delegate = self;
     self.imageView.image = [UIImage imageNamed:self.imageName];
+    
+    //figure out the scalling between the frame and the image size
+    //find for width
+    float scalingFactorX = self.view.frame.size.width / self.imageView.image.size.width;
+    
+    //find for height
+    float scalingFactorY = self.view.frame.size.height / self.imageView.image.size.height;
+    
+    //then choose the smaller one
+    if(scalingFactorX < scalingFactorY){
+        self.scrollView.zoomScale = scalingFactorX;
+    }else{
+        self.scrollView.zoomScale = scalingFactorY;
+    }
+    
+    
+    
+    
 }
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
